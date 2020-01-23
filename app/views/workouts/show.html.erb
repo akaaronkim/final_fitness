@@ -4,7 +4,7 @@
 
 <div>
   <h4 class= "workout-subtitle">
-  Posted By: <%= link_to User.find(@author_id).name, user_profile_path(User.find(@author_id)) %>
+  Posted By: <%= link_to User.find(@trainer_id).name, user_profile_path(User.find(@trainer_id)) %>
   on <%= (@workout.created_at.strftime("%B, %d, %Y")) %> |
    <%= link_to @workout.content_type,@workout.content_link, target: :_blank %>
   </h4>
