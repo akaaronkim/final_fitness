@@ -1,0 +1,2 @@
+module Fitness::UsersHelper
+end

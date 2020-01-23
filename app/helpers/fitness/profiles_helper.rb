@@ -1,0 +1,2 @@
+module Fitness::ProfilesHelper
+end

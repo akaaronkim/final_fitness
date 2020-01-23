@@ -1,0 +1,65 @@
+<div class="container">
+
+
+<h1><%= @user.name %></h1>
+
+<div class="">
+  <% if @current_user.id != @user.id  %>
+    <% if @current_user.trainer_ids.include?(@user.id)  %>
+      <h4 class="copyright text-muted"><em>Added Coach</em></h4>
+
+      <span>
+      <%= form_for @current_user, url: user_delete_relationship_path(@current_user.id), method: :delete do |f| %>
+      <%= f.hidden_field :trainer_id, value: @user.id %>
+      <%= f.submit "Remove Coach" %>
+      <% end %>
+      </span>
+
+    <% else %>
+      <%= form_for @current_user, url: user_coach_path(@current_user.id), method: :post do |f| %>
+      <%= f.hidden_field :trainer_id, value: @user.id %>
+      <%= f.submit "Add Coach" %>
+      <% end %>
+    <% end %>
+  <% else %>
+      <%= link_to "Edit My Profile", user_profiles_edit_path(@user)  %> <br>
+  <% end  %> <br>
+</div>
+
+
+<div class="">
+  <img src= "<%= @user.photo_url %>" alt= "user image" height="100" width="150"><br>
+  <br>
+  <h4 class="post-subtitle">About me: <%= @user.about_me %></h4><br>
+</div>
+
+
+<div class="container">
+   <div class="row">
+     <div class="col-lg-8 col-md-10 mx-auto">
+
+<h2> Workouts : </h2>
+
+<% @workouts and @workouts.each do |workout| %>
+  <div class="workout-preview">
+       <a href="<%= user_workouts_path(@user.id, workout.id)%>">
+         <h4 class="workout-title">
+          <%= workout.title %>
+         </h4>
+         <h5 class="workout-subtitle">
+
+          Posted by <%= @user.name %> on <%= (workout.created_at.strftime("%B %d, %Y")) %> | <%= workout.content_type %>
+
+         </h5>
+       </a>
+       <h6 class="workout-subtitle"><%=image_tag(".png", height: "40", width: "40")%> <%= workout.fitnesss.count %>&nbsp; | &nbsp;<%= image_tag(".png", height: "40", width: "40") %> <%= workout.reviews.count %></h6>
+     </div>
+     <div class="lineb">
+
+  </div>
+<% end %>
+
+   </div>
+  </div>
+</div>
+</div>

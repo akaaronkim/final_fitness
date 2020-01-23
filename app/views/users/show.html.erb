@@ -1,0 +1,113 @@
+<div class="container">
+
+<% if @user.id == session[:user_id] %>
+  <h1>Welcome, <%= @user.name %>!</h1>
+<% else %>
+  <h1><%= @user.name %></h1>
+<% end %>
+
+<p class="copyright text-muted">Diets: <%= @diet_ids %> | Coaches: <%= @trainer_count %></p>
+<div class="container">
+   <div class="row">
+     <div class="col-lg-8 col-md-8 mx-auto">
+
+<h2>My Diets and Workouts:</h2>
+
+<% if @trainer_count == 0 %>
+<h3>Your feed is empty! <%= link_to "Click", user_trainer_path(@user) %> to find coaches and diets.</h3>
+<% end %>
+
+<% @trainer_hash.each do |trainer, workout_data| %>
+
+  <!-- BEGIN LOCAL VARIABLES JUST FOR MODAL-->
+  <%@training_id = workout_data[:user_id]%>
+  <% @current_user = session[:user_id]%>
+  <% @workout_modal = workout_data[:workout_id]%>
+  <% @workout = Workout.find(workout_data[:workout_id])%>
+  <!-- END LOCAL VARIABLES JUST FOR MODAL-->
+
+<div class="workout-preview">
+     <a href="#<%=@workout_modal%>Modal" data-toggle="modal">
+       <h4 class="workout-title">
+        <%= workout_data[:latest_workout_title] %>
+       </h4>
+       <h5 class="workout-subtitle">
+
+         Posted by <%= influencer %> on <%= workout_data[:latest_workout_date] %> | <%= workout_data[:content_type] %>
+
+       </h5>
+     </a>
+     <h6 class="workout-subtitle"><%=image_tag(".png", height: "40", width: "40")%> <%= workout_data[:pump_count] %>&nbsp; | &nbsp;<%= image_tag(".png", height: "40", width: "40") %> <%= workout_data[:review_count] %></h6>
+   </div>
+   <div class="lineb">
+   </div>
+
+   <!-- BEGIN Modal for workout details  -->
+
+   <!-- BEGIN LOCAL VARIABLES JUST FOR MODAL-->
+   <%@training_id = workout_data[:user_id]%>
+   <% @current_user = session[:user_id]%>
+   <% @workout_modal = workout_data[:workout_id]%>
+   <% @workout = Workout.find(workout_data[:workout_id])%>
+   <!-- END LOCAL VARIABLES JUST FOR MODAL-->
+
+   <div class="modal" id="<%=@workout_modal%>Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal-dialog" role="document">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title" id="exampleModalLabel"><h4 class= "workout-subtitle">
+             <h3><%= @workout.title %> </h3>
+           Posted By: <%= link_to User.find(@training_id).name, user_profile_path(User.find(@training_id)) %>
+           on <%= (@workout.created_at.strftime("%B, %d, %Y")) %> |
+            <%= link_to @workout.content_type,@workout.content_link, target: :_blank %>
+            <h5><%= link_to image_tag(".png", height: "45", width: "45"), user_workout_pumps_path(@current_user, @workout.id), method: :post, controller: 'pumps'%> <%= @workout.pumps.count %> &nbsp; | &nbsp;
+             <%= image_tag(".png", height: "45", width: "45")%> <%= @workout.reviews.count %></h5>
+           </h4>
+
+         </div>
+         <div class="modal-body">
+             <h4>
+             Description: <%= @workout.description %> <br>
+             </h4>
+             <br>
+             <h4>Reviews:</h4>
+            <% @workout.reviews.each do |review| %>
+              <div class="container please_align">
+                <div class="dialogbox">
+                  <div class="body">
+                    <span class="tip tip-up"></span>
+                    <div class="message">
+
+                  <span class="review_header"><%= review.find_user %> - <%= (review.created_at.strftime("%B %d, %Y")) %></span><br><span>
+                  <%= review.text %></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+               <% end %>
+
+               <div class=" container please_align">
+                 <h5>Add Review:</h5>
+                 <%= form_for @new_review, url: user_workout_reviews_path(@current_user, @workout.id) do |f| %>
+                 <%= f.text_area :text, maxlength: 200 %> <br>
+                 <%= f.label :text, "200 characters", class:"workout-subtitle" %> <br>
+                 <br>
+                 <%= f.submit "Create Review" %>
+                 <% end  %>
+               </div>
+               </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+         </div>
+       </div>
+     </div>
+   </div>
+   <!-- END Modal for workout details -->
+
+<% end %>
+
+   </div>
+  </div>
+</div>
+
+</div>

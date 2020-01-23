@@ -1,0 +1,2 @@
+module Fitness::CoachesHelper
+end
