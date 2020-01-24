@@ -4,6 +4,9 @@ class CreateCoaches < ActiveRecord::Migration[6.0]
       t.integer :user_id
       t.integer :workout_id
       t.integer :trainer_id
+      t.integer :diet_id
+      t.integer :dietitian_id
+      
       t.timestamps
     end
   end

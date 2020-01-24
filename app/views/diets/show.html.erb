@@ -1,0 +1,47 @@
+<div class="container">
+
+<h1><%= @diet.title %> </h1>
+
+<div>
+  <h4 class= "diet-subtitle">
+  Posted By: <%= link_to User.find(@dietitian_id).name, user_profiles_path(User.find(@dietitian_id)) %>
+  on <%= (@diet.created_at.strftime("%B, %d, %Y")) %> |
+   <%= link_to @diet.content_type,@diet.content_link, target: :_blank %>
+  </h4>
+  <h4><%= link_to image_tag("pump.png", height: "45", width: "45"), user_diet_pumps_path(@current_user, @diet.id), method: :post, controller: 'pumps'%> <%= @diet.pumps.count %> &nbsp; | &nbsp;
+   <%= image_tag("review.png", height: "45", width: "45")%> <%= @diet.reviews.count %></h4>
+</div>
+<div>
+   <h4>
+   Description: <%= @diet.description %> <br>
+   </h4>
+   <br>
+   <h4>Reviews:</h4>
+  <% @reviews.each do |review| %>
+    <div class="container please_align">
+      <div class="dialogbox">
+        <div class="body">
+          <span class="tip tip-up"></span>
+          <div class="message">
+
+        <span class="review_header"><%= review.find_user %> - <%= (review.created_at.strftime("%B %d, %Y")) %></span><br><span>
+  	    <%= review.text %></span>
+        </div>
+      </div>
+    </div>
+  </div>
+     <% end %>
+
+
+
+<div class=" container please_align">
+  <h5>Add Review:</h5>
+  <%= form_for @new_review, url: user_diet_reviews_path(@current_user, @diet.id) do |f| %>
+  <%= f.text_area :text, maxlength: 200 %> <br>
+  <%= f.label :text, "Be Nice", class:"diet-subtitle" %> <br>
+  <br>
+  <%= f.submit "Create review" %>
+  <% end  %>
+</div>
+</div>
+</div>

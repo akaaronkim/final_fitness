@@ -8,7 +8,7 @@
   on <%= (@workout.created_at.strftime("%B, %d, %Y")) %> |
    <%= link_to @workout.content_type,@workout.content_link, target: :_blank %>
   </h4>
-  <h4><%= link_to image_tag("pump.png", height: "45", width: "45"), user_workout_fitnesss_path(@current_user, @workout.id), method: :post, controller: 'fitnesss'%> <%= @workout.fitnesss.count %> &nbsp; | &nbsp;
+  <h4><%= link_to image_tag("pump.png", height: "45", width: "45"), u_ser_workout_pumps_path(@current_user, @workout.id), method: :post, controller: 'pumps'%> <%= @workout.pumps.count %> &nbsp; | &nbsp;
    <%= image_tag("review.png", height: "45", width: "45")%> <%= @workout.reviews.count %></h4>
 </div>
 <div>

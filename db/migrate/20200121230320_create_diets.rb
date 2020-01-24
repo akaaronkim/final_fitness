@@ -5,7 +5,7 @@ class CreateDiets < ActiveRecord::Migration[6.0]
       t.string :content_type
       t.string :content_link
       t.string :description
-      
+      t.integer :user_id
       t.timestamps
     end
   end

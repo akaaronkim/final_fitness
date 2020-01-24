@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     
     resources :users do
       get '/trainer', to: 'users#trainer'
+      get '/advicer', to: 'users#advicer'
       post '/coaches', to: 'coaches#create'
       delete '/coaches', to: 'coaches#destroy', as: 'delete_relationship'
       get '/profiles', to: 'profiles#show'
@@ -16,8 +17,13 @@ Rails.application.routes.draw do
         post '/pumps', to: 'pumps#create'
         post '/reviews', to: 'reviews#create'
       end
+      resources :diets do
+        post '/pumps', to: 'pumps#create'
+        post '/reviews', to: 'reviews#create'
+      end
     end
     resources :workouts
+    resources :diets
   end
 
   

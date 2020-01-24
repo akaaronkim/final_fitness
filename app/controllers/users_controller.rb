@@ -5,6 +5,8 @@ class UsersController < ApplicationController
   def show
     @trainer_hash = @user.find_trainers
     @trainer_count = @user.coaches.count
+    @dietitian_hash = @user.find_dietitians
+    @dietitian_count = @user.coaches.count
     @new_review = Review.new
   end
 
@@ -32,6 +34,17 @@ class UsersController < ApplicationController
       if @workouts == nil
         @searched = false
       elsif params[:search] && @workouts.length >= 1
+        @searched = true
+      end
+  end
+  
+  def advicer
+    @new_review = Review.new
+    @content_types = ["Workout", "Diet"]
+    @diets = Diet.all
+      if @diets == nil
+        @searched = false
+      elsif params[:search] && @diets.length >= 1
         @searched = true
       end
   end

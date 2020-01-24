@@ -16,6 +16,8 @@ ActiveRecord::Schema.define(version: 2020_01_23_182820) do
     t.integer "user_id"
     t.integer "workout_id"
     t.integer "trainer_id"
+    t.integer "diet_id"
+    t.integer "dietitian_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -25,6 +27,7 @@ ActiveRecord::Schema.define(version: 2020_01_23_182820) do
     t.string "content_type"
     t.string "content_link"
     t.string "description"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -32,6 +35,7 @@ ActiveRecord::Schema.define(version: 2020_01_23_182820) do
   create_table "pumps", force: :cascade do |t|
     t.integer "user_id"
     t.integer "workout_id"
+    t.integer "diet_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -54,6 +58,7 @@ ActiveRecord::Schema.define(version: 2020_01_23_182820) do
   create_table "reviews", force: :cascade do |t|
     t.integer "user_id"
     t.integer "workout_id"
+    t.integer "diet_id"
     t.string "text"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -63,9 +68,9 @@ ActiveRecord::Schema.define(version: 2020_01_23_182820) do
     t.string "name"
     t.string "url"
     t.string "img"
-    t.string "address"
-    t.string "phone"
+    t.integer "phone"
     t.string "bio"
+    t.string "company"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "username"

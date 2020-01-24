@@ -46,14 +46,15 @@
         <% end %>
 
         <%= form_for @current_user, url: new_workout_path(session[:user_id]), method: :get do |f| %>
-        <%= f.submit "Be a Trainer", class: "copyright logout" %>
+        <%= f.submit "Become a Trainer", class: "copyright logout" %>
         <% end %>
-        
-     
 
+     
         <%= form_for @current_user, url: user_trainer_path(@current_user), method: :get do |f| %>
         <%= f.submit "Workouts", class: "copyright logout" %>
         <% end %>
+      
+
         <%= form_for @current_user, url: end_session_path, method: :delete do |f| %>
         <%= f.submit "Logout", class: "copyright logout" %>
         <% end %>

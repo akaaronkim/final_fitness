@@ -6,7 +6,7 @@
   <h1><%= @user.name %></h1>
 <% end %>
 
-<p class="copyright text-muted">Diets: <%= @diet_count %> | Coaches: <%= @trainer_count %></p>
+<p class="copyright text-muted">Diets: <%= @dietitian_count %> | Coaches: <%= @trainer_count %></p>
 <div class="container">
    <div class="row">
      <div class="col-lg-8 col-md-8 mx-auto">
@@ -14,7 +14,7 @@
 <h2>My Diets and Workouts:</h2>
 
 <% if @trainer_count == 0 %>
-<h3>Your feed is empty! <%= link_to "Click", user_trainer_path(@user) %> to find coaches and diets.</h3>
+<h3>Your feed is empty! <%= link_to "Click", user_trainer_path(@user) %> to find coaches.</h3>
 <% end %>
 
 <% @trainer_hash.each do |trainer, workout_data| %>

@@ -1,10 +1,10 @@
 <div class="container">
 
 
-<h1>Workouts</h1>
+<h1>Diets</h1>
 
 <h4>Search by Content Type</h4>
-<%= form_tag user_trainer_path, method: :get do  %>
+<%= form_tag user_advice_path, method: :get do  %>
 <%= select_tag :search, options_for_select(@content_types), selected: params[:search] %>
 <%= submit_tag ("Search") %>
 <% end  %>
@@ -21,54 +21,54 @@
 
 <% if @searched == true || @searched == nil %>
 
-  <% @workouts and @workouts.each do |workout| %>
+  <% @diets and @diets.each do |diet| %>
     
     <!--BEGIN local variablse to name author and current user for modal-->
-    <%@trainer_id = workout.user_id %>
+    <%@dietitian_id = diet.user_id %>
     <% @current_user = session[:user_id]%>
-    <% @workout_modal = workout.id%>
+    <% @diet_modal = diet.id%>
     <!--END local variable to name author and current for modal-->
     <!--BEGIN create post link on discover page with information-->
-    <div class="workout-preview">
-         <a href="#<%=@workout_modal%>Modal" data-toggle="modal">
-           <h4 class="workout-title">
+    <div class="diet-preview">
+         <a href="#<%=@diet_modal%>Modal" data-toggle="modal">
+           <h4 class="diet-title">
           
-            <%= workout.title %>
+            <%= diet.title %>
            </h4>
-           <h5 class="workout-subtitle">
+           <h5 class="diet-subtitle">
 
-           Created by <%= User.find(workout.user_id).name %> on <%= (workout.created_at.strftime("%B %d, %Y")) %> | <%= workout.content_type %>
+           Created by <%= User.find(diet.user_id).name %> on <%= (diet.created_at.strftime("%B %d, %Y")) %> | <%= diet.content_type %>
 
            </h5>
          </a>
-         <h6 class="workout-subtitle"><%=image_tag("pump.png", height: "40", width: "40")%> <%= workout.pumps.count %>&nbsp; | &nbsp;<%= image_tag("review.png", height: "40", width: "40") %> <%= workout.reviews.count %></h6>
+         <h6 class="diet-subtitle"><%=image_tag("pump.png", height: "40", width: "40")%> <%= diet.pumps.count %>&nbsp; | &nbsp;<%= image_tag("review.png", height: "40", width: "40") %> <%= diet.reviews.count %></h6>
        </div>
        <div class="lineb">
     </div>
-    <!--END create workout link on discover page with information-->
+    <!--END create diet link on discover page with information-->
 
-    <!-- BEGIN Modal for workout details  -->
-    <div class="modal" id="<%=@workout_modal%>Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- BEGIN Modal for diet details  -->
+    <div class="modal" id="<%=@diet_modal%>Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel"><h4 class= "workout-subtitle">
-              <h3><%= workout.title %> </h3>
-            Created By: <%= link_to User.find(@trainer_id).name, user_profiles_path(User.find(@trainer_id)) %>
-            on <%= (workout.created_at.strftime("%B, %d, %Y")) %> |
-             <%= link_to workout.content_type,workout.content_link, target: :_blank %>
-             <h5><%= link_to image_tag("pump.png", height: "45", width: "45"), user_workout_pumps_path(@current_user, workout.id), method: :post, controller: 'pumps'%> <%= workout.pumps.count %> &nbsp; | &nbsp;
-              <%= image_tag("review.png", height: "45", width: "45")%> <%= workout.reviews.count %></h5>
+            <h5 class="modal-title" id="exampleModalLabel"><h4 class= "diet-subtitle">
+              <h3><%= diet.title %> </h3>
+            Created By: <%= link_to User.find(@dietitian_id).name, user_profiles_path(User.find(@dietitian_id)) %>
+            on <%= (diet.created_at.strftime("%B, %d, %Y")) %> |
+             <%= link_to diet.content_type,diet.content_link, target: :_blank %>
+             <h5><%= link_to image_tag("pump.png", height: "45", width: "45"), user_diet_pumps_path(@current_user, diet.id), method: :post, controller: 'pumps'%> <%= diet.pumps.count %> &nbsp; | &nbsp;
+              <%= image_tag("review.png", height: "45", width: "45")%> <%= diet.reviews.count %></h5>
             </h4>
 
           </div>
           <div class="modal-body">
               <h4>
-              Description: <%= workout.description %> <br>
+              Description: <%= diet.description %> <br>
               </h4>
               <br>
               <h4>Reviews:</h4>
-             <% workout.reviews.each do |review| %>
+             <% diet.reviews.each do |review| %>
                <div class="container please_align">
                  <div class="dialogbox">
                    <div class="body">
@@ -85,9 +85,9 @@
 
                 <div class=" container please_align">
                   <h5>Add Review:</h5>
-                  <%= form_for @new_review, url: user_workout_reviews_path(@current_user, workout.id) do |f| %>
+                  <%= form_for @new_review, url: user_diet_reviews_path(@current_user, diet.id) do |f| %>
                   <%= f.text_area :text, maxlength: 200 %> <br>
-                  <%= f.label :text, "200 characters", class:"workout-subtitle" %> <br>
+                  <%= f.label :text, "200 characters", class:"diet-subtitle" %> <br>
                   <br>
                   <%= f.submit "Create Review" %>
                   <% end  %>
@@ -99,7 +99,7 @@
         </div>
       </div>
     </div>
-    <!-- END Modal for workout details -->
+    <!-- END Modal for diet details -->
 
 
   <% end %>

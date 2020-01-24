@@ -1,0 +1,18 @@
+<h1>Become a Dietitian</h1>
+
+<%= form_for @workout, url: user_diets_path([:user_id]) do |f|  %>
+ <%= f.label :title, "Diet Type:" %><br>
+ <%= f.text_field :title  %> <br>
+<br>
+ <%= f.label :description, "Description:" %><br>
+ <%= f.text_field :description  %> <br>
+<br>
+ <%= f.label :content_link, "Content Link:" %><br>
+ <%= f.text_field :content_link  %> <br>
+<br>
+ <%= f.label :content_type, "Content Type:" %><br>
+ <%= f.collection_select :content_type, @content_types, :to_s, :to_s, include_blank: false %><br>
+<br>
+<%= f.submit %>
+<br>
+<% end  %>
