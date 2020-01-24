@@ -1,11 +1,12 @@
 <div class="container">
 
+
 <h1>Trainers</h1>
 
 <h4>Search by Content Type</h4>
-<%= form_tag user_trainer rails_path, method: :get do  %>
+<%= form_tag user_trainer_path, method: :get do  %>
 <%= select_tag :search, options_for_select(@content_types), selected: params[:search] %>
-  <%= submit_tag ("Search") %>
+<%= submit_tag ("Search") %>
 <% end  %>
 
 <% if @searched == true %>
@@ -19,13 +20,15 @@
      <div class="col-lg-8 col-md-10 mx-auto">
 
 <% if @searched == true || @searched == nil %>
-  <% @workouts.each do |workout| %>
-    <!--BEGIN local variablse to name training and current user for modal-->
-    <%@training_id = workout.user_id %>
+
+  <% @workouts and @workouts.each do |workout| %>
+    
+    <!--BEGIN local variablse to name author and current user for modal-->
+    <%@trainer_id = workout.user_id %>
     <% @current_user = session[:user_id]%>
     <% @workout_modal = workout.id%>
-    <!--END local variable to name training and current for modal-->
-    <!--BEGIN create workout link on discover page with information-->
+    <!--END local variable to name author and current for modal-->
+    <!--BEGIN create post link on discover page with information-->
     <div class="workout-preview">
          <a href="#<%=@workout_modal%>Modal" data-toggle="modal">
            <h4 class="workout-title">
@@ -37,11 +40,11 @@
 
            </h5>
          </a>
-        #  <h6 class="workout-subtitle"><%=image_tag(#, height: "40", width: "40")%> <%= workout.pumps.count %>&nbsp; | &nbsp;<%= image_tag(".png", height: "40", width: "40") %> <%= workout.reviews.count %></h6>
+         <h6 class="workout-subtitle"><%=image_tag("pump.png", height: "40", width: "40")%> <%= workout.pumps.count %>&nbsp; | &nbsp;<%= image_tag("review.png", height: "40", width: "40") %> <%= workout.reviews.count %></h6>
        </div>
        <div class="lineb">
     </div>
-    <!--END create workout link on trainer page with information-->
+    <!--END create post link on discover page with information-->
 
     <!-- BEGIN Modal for workout details  -->
     <div class="modal" id="<%=@workout_modal%>Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -50,17 +53,17 @@
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel"><h4 class= "workout-subtitle">
               <h3><%= workout.title %> </h3>
-            Posted By: <%= link_to User.find(@training_id).name, user_profile_path(User.find(@training_id)) %>
-            on <%= (workout.created_at.strftime("%B, %d, %Y")) %> |
+            Posted By: <%= link_to User.find(@trainer_id).name, user_profiles_path(User.find(@trainer_id)) %>
+            on <%= (post.created_at.strftime("%B, %d, %Y")) %> |
              <%= link_to workout.content_type,workout.content_link, target: :_blank %>
-            #  <h5><%= link_to image_tag(".png", height: "45", width: "45"), user_workout_fitnesss_path(@current_user, workout.id), method: :post, controller: 'pumps'%> <%= workout.pumps.count %> &nbsp; | &nbsp;
-              <%= image_tag(".png", height: "45", width: "45")%> <%= workout.reviews.count %></h5>
+             <h5><%= link_to image_tag("pump.png", height: "45", width: "45"), user_workout_pumps_path(@current_user, workout.id), method: :post, controller: 'pumps'%> <%= workout.pumps.count %> &nbsp; | &nbsp;
+              <%= image_tag("review.png", height: "45", width: "45")%> <%= workout.reviews.count %></h5>
             </h4>
 
           </div>
           <div class="modal-body">
               <h4>
-              Description: <%= workout.description %> <br>
+              Description: <%= post.description %> <br>
               </h4>
               <br>
               <h4>Reviews:</h4>
@@ -83,7 +86,7 @@
                   <h5>Add Review:</h5>
                   <%= form_for @new_review, url: user_workout_reviews_path(@current_user, workout.id) do |f| %>
                   <%= f.text_area :text, maxlength: 200 %> <br>
-                  <%= f.label :text, "200 characters", class:"workout-subtitle" %> <br>
+                  <%= f.label :text, "200 characters", class:"post-subtitle" %> <br>
                   <br>
                   <%= f.submit "Create Review" %>
                   <% end  %>

@@ -3,9 +3,9 @@ class CoachesController < ApplicationController
         @train = Coach.new(user_id: params[:user_id], trainer_id: params[:user][:trainer_id])
        if @train.valid?
          @train.save
-         redirect_to user_profile_path(params[:user][:trainer_id])
+         redirect_to user_profiles_path(params[:user][:trainer_id])
        else
-         redirect_to user_profile_path(params[:user][:trainer_id])
+         redirect_to user_profiles_path(params[:user][:trainer_id])
        end
       end
     
@@ -14,6 +14,6 @@ class CoachesController < ApplicationController
     
         @train.destroy
     
-        redirect_to user_profile_path(params[:user][:trainer_id])
+        redirect_to user_profiles_path(params[:user][:trainer_id])
       end
 end

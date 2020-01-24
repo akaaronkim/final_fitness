@@ -28,9 +28,9 @@
 
 
 <div class="">
-  <img src= "<%= @user.photo_url %>" alt= "user image" height="100" width="150"><br>
+  <img src= "<%= @user.url %>" alt= "user image" height="100" width="150"><br>
   <br>
-  <h4 class="post-subtitle">About me: <%= @user.about_me %></h4><br>
+  <h4 class="workout-subtitle">About me: <%= @user.bio %></h4><br>
 </div>
 
 
@@ -52,7 +52,7 @@
 
          </h5>
        </a>
-       <h6 class="workout-subtitle"><%=image_tag(".png", height: "40", width: "40")%> <%= workout.fitnesss.count %>&nbsp; | &nbsp;<%= image_tag(".png", height: "40", width: "40") %> <%= workout.reviews.count %></h6>
+       <h6 class="workout-subtitle"><%=image_tag("pump.jpg", height: "40", width: "40")%> <%= workout.pumps.count %>&nbsp; | &nbsp;<%= image_tag("review.png", height: "40", width: "40") %> <%= workout.reviews.count %></h6>
      </div>
      <div class="lineb">
 
@@ -63,3 +63,6 @@
   </div>
 </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link href="css/clean-blog.min.css" rel="stylesheet">

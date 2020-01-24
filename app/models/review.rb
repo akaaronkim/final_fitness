@@ -1,4 +1,10 @@
 class Review < ApplicationRecord
-    belongs_to :workout_type
+    belongs_to :workout
     belongs_to :user
+  
+    
+  
+    def find_user
+      User.find(self.user_id).name
+    end
 end

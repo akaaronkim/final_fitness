@@ -20,18 +20,18 @@
 <h3>Edit Profile:</h3>
 
 
-<%= form_for @user, url: user_workout_profile_update_path, method: :post do |f| %>
+<%= form_for @user, url: user_workouts_profiles_update_path, method: :post do |f| %>
 <div class="form-group">
 <%= f.label :name, "Name:" %><br>
 <%= f.text_field :name %>
 </div>
 <div class="form-group">
-<%= f.label :photo_url, "Photo URL:" %><br>
-<%= f.text_field :photo_url %>
+<%= f.label :url, "URL:" %><br>
+<%= f.text_field :url %>
 </div>
 <div class="form-group">
-<%= f.label :about_me, "About Me:" %><br>
-<%= f.text_area :about_me, maxlength: 200 %>
+<%= f.label :bio, "Bio:" %><br>
+<%= f.text_area :bio, maxlength: 200 %>
 </div>
 <div class="form-group">
 <%= f.submit "Update Profile" %>

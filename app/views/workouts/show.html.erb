@@ -4,12 +4,12 @@
 
 <div>
   <h4 class= "workout-subtitle">
-  Posted By: <%= link_to User.find(@trainer_id).name, user_profile_path(User.find(@trainer_id)) %>
+  Posted By: <%= link_to User.find(@trainer_id).name, user_profiles_path(User.find(@trainer_id)) %>
   on <%= (@workout.created_at.strftime("%B, %d, %Y")) %> |
    <%= link_to @workout.content_type,@workout.content_link, target: :_blank %>
   </h4>
-  <h4><%= link_to image_tag(".png", height: "45", width: "45"), user_workout_fitnesss_path(@current_user, @workout.id), method: :post, controller: 'fitnesss'%> <%= @workout.fitnesss.count %> &nbsp; | &nbsp;
-   <%= image_tag(".png", height: "45", width: "45")%> <%= @workout.reviews.count %></h4>
+  <h4><%= link_to image_tag("pump.png", height: "45", width: "45"), user_workout_fitnesss_path(@current_user, @workout.id), method: :post, controller: 'fitnesss'%> <%= @workout.fitnesss.count %> &nbsp; | &nbsp;
+   <%= image_tag("review.png", height: "45", width: "45")%> <%= @workout.reviews.count %></h4>
 </div>
 <div>
    <h4>
@@ -35,10 +35,10 @@
 
 
 <div class=" container please_align">
-  <h5>Add review:</h5>
+  <h5>Add Review:</h5>
   <%= form_for @new_review, url: user_workout_reviews_path(@current_user, @workout.id) do |f| %>
   <%= f.text_area :text, maxlength: 200 %> <br>
-  <%= f.label :text, "200 characters", class:"workout-subtitle" %> <br>
+  <%= f.label :text, "Be Nice", class:"workout-subtitle" %> <br>
   <br>
   <%= f.submit "Create review" %>
   <% end  %>

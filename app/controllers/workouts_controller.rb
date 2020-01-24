@@ -9,7 +9,7 @@ class WorkoutsController < ApplicationController
   def destroy
     @user = User.find(params[:user_id])
     @workout.destroy
-    redirect_to user_profile_edit_path(@user)
+    redirect_to user_profiles_edit_path(@user)
   end
 
   def show
@@ -26,12 +26,12 @@ class WorkoutsController < ApplicationController
   end
 
   def create
-    @user = User.find(params[:user_id])
+    @user = User.find(session[:user_id])
     @workout = Workout.new(workout_params)
     @user.workouts << @workout
     if @workout.save
       @user.save
-      redirect_to user_profile_path(@user)
+      redirect_to user_profiles_path(:user_id)
     else
       render :new
     end

@@ -5,8 +5,7 @@ class UsersController < ApplicationController
   def show
     @trainer_hash = @user.find_trainers
     @trainer_count = @user.coaches.count
-
-
+    @new_review = Review.new
   end
 
   def new
@@ -27,7 +26,7 @@ class UsersController < ApplicationController
 
 
   def trainers
-
+    @new_review = Review.new
     @content_types = ["Workout", "Diet"]
     @workouts = Workout.search(params[:search])
       if @workouts == nil

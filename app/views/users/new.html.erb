@@ -27,15 +27,27 @@
   </div>
   <div class="form-group">
     <label>Password Confirmation:</label><br>
-    <%= f.password_field :password_confirmation%>
+    <%= f.password_field :password_confirmation %>
   </div>
   <div class="form-group">
-    <%= label_tag :photo_url, "Photo URL:" %><br>
-    <%= f.text_field :photo_url %>
+    <%= label_tag :url, "URL:" %><br>
+    <%= f.text_field :url %>
   </div>
   <div class="form-group">
-    <%= label_tag :about_me, "About Me:" %><br>
-    <%= f.text_area :about_me, maxlength: 200 %>
+    <%= label_tag :phone, "Phone:" %><br>
+    <%= f.telephone_field :phone %>
+  </div>
+  <div class="form-group">
+    <%= label_tag :address, "Address:" %><br>
+    <%= f.text_field :address %>
+  </div>
+  <div class="form-group">
+    <%= label_tag :bio, "Bio:" %><br>
+    <%= f.text_area :bio, maxlength: 200 %>
+  </div>
+  <div class="form-group">
+    <%= label_tag :img, "Photo:" %><br>
+    <%= f.text_field :img %>
   </div>
     <%= f.submit "Create Account"%>
 

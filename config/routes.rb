@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
     
-    resources :sessions 
+    resources :sessions
     get 'profiles/login', to: 'sessions#new', as: 'login'
     delete '/sessions', to: 'sessions#destroy', as: 'end_session'
     
@@ -11,13 +11,14 @@ Rails.application.routes.draw do
       get '/profiles', to: 'profiles#show'
       get '/profiles/edit', to: 'profiles#edit'
       post '/profiles', to: 'profiles#update', as: 'workouts_profiles_update'
-      get '/workouts', to: 'workouts#show'
+      
+      resources :workouts do
+        post '/pumps', to: 'pumps#create'
+        post '/reviews', to: 'reviews#create'
+      end
     end
- 
     resources :workouts
-    resources :coaches
-    resources :reviews
-    resources :pumps
-    resources :diets
-    resources :workout_schedules
-end
+  end
+
+  
+

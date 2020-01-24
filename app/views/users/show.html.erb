@@ -6,7 +6,7 @@
   <h1><%= @user.name %></h1>
 <% end %>
 
-<p class="copyright text-muted">Diets: <%= @diet_ids %> | Coaches: <%= @trainer_count %></p>
+<p class="copyright text-muted">Diets: <%= @diet_count %> | Coaches: <%= @trainer_count %></p>
 <div class="container">
    <div class="row">
      <div class="col-lg-8 col-md-8 mx-auto">
@@ -33,14 +33,15 @@
        </h4>
        <h5 class="workout-subtitle">
 
-         Posted by <%= influencer %> on <%= workout_data[:latest_workout_date] %> | <%= workout_data[:content_type] %>
+         Created by <%= trainer %> on <%= workout_data[:latest_workout_date] %> | <%= workout_data[:content_type] %>
 
        </h5>
      </a>
-     <h6 class="workout-subtitle"><%=image_tag(".png", height: "40", width: "40")%> <%= workout_data[:pump_count] %>&nbsp; | &nbsp;<%= image_tag(".png", height: "40", width: "40") %> <%= workout_data[:review_count] %></h6>
+     <h6 class="workout-subtitle"><%=image_tag("pump.png", height: "40", width: "40")%> <%= workout_data[:pump_count] %>&nbsp; | &nbsp;<%= image_tag("review.png", height: "40", width: "40") %> <%= workout_data[:review_count] %></h6>
    </div>
    <div class="lineb">
    </div>
+
 
    <!-- BEGIN Modal for workout details  -->
 
@@ -57,11 +58,11 @@
          <div class="modal-header">
            <h5 class="modal-title" id="exampleModalLabel"><h4 class= "workout-subtitle">
              <h3><%= @workout.title %> </h3>
-           Posted By: <%= link_to User.find(@training_id).name, user_profile_path(User.find(@training_id)) %>
+           Posted By: <%= link_to User.find(@training_id).name, user_profiles_path(User.find(@training_id)) %>
            on <%= (@workout.created_at.strftime("%B, %d, %Y")) %> |
             <%= link_to @workout.content_type,@workout.content_link, target: :_blank %>
-            <h5><%= link_to image_tag(".png", height: "45", width: "45"), user_workout_pumps_path(@current_user, @workout.id), method: :post, controller: 'pumps'%> <%= @workout.pumps.count %> &nbsp; | &nbsp;
-             <%= image_tag(".png", height: "45", width: "45")%> <%= @workout.reviews.count %></h5>
+            <h5><%= link_to image_tag("pump.png", height: "45", width: "45"), user_workout_pumps_path(@current_user, @workout.id), method: :post, controller: 'pumps'%> <%= @workout.pumps.count %> &nbsp; | &nbsp;
+             <%= image_tag("review.png", height: "45", width: "45")%> <%= @workout.reviews.count %></h5>
            </h4>
 
          </div>
@@ -90,7 +91,7 @@
                  <h5>Add Review:</h5>
                  <%= form_for @new_review, url: user_workout_reviews_path(@current_user, @workout.id) do |f| %>
                  <%= f.text_area :text, maxlength: 200 %> <br>
-                 <%= f.label :text, "200 characters", class:"workout-subtitle" %> <br>
+                 <%= f.label :text, "Be Nice!", class:"workout-subtitle" %> <br>
                  <br>
                  <%= f.submit "Create Review" %>
                  <% end  %>
@@ -111,3 +112,7 @@
 </div>
 
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link href="css/clean-blog.min.css" rel="stylesheet">

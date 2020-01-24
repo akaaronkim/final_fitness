@@ -10,17 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_22_193741) do
+ActiveRecord::Schema.define(version: 2020_01_23_182820) do
 
   create_table "coaches", force: :cascade do |t|
     t.integer "user_id"
     t.integer "workout_id"
+    t.integer "trainer_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "trainer_id"
   end
 
   create_table "diets", force: :cascade do |t|
+    t.string "title"
+    t.string "content_type"
+    t.string "content_link"
+    t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -28,6 +32,21 @@ ActiveRecord::Schema.define(version: 2020_01_22_193741) do
   create_table "pumps", force: :cascade do |t|
     t.integer "user_id"
     t.integer "workout_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "recipe_diets", force: :cascade do |t|
+    t.integer "diet_id"
+    t.integer "recipe_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "recipes", force: :cascade do |t|
+    t.string "img"
+    t.string "url"
+    t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -42,10 +61,11 @@ ActiveRecord::Schema.define(version: 2020_01_22_193741) do
 
   create_table "users", force: :cascade do |t|
     t.string "name"
-    t.string "photo_url"
-    t.string "city"
-    t.string "email"
-    t.string "about_me"
+    t.string "url"
+    t.string "img"
+    t.string "address"
+    t.string "phone"
+    t.string "bio"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "username"
@@ -62,9 +82,9 @@ ActiveRecord::Schema.define(version: 2020_01_22_193741) do
     t.string "content_type"
     t.string "content_link"
     t.string "description"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
   end
 
 end

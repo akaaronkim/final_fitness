@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +7,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
-  <meta name="author" content="">
+  <meta name="Trainer" content="">
 
   <title>Fitness - Creating a Healthy Lifestyle</title>
 
@@ -31,23 +32,25 @@
   <!-- Navigation -->
 
   <% if session[:user_id] != nil %>
-    <% @current_user = User.find(session[:user_id]) %>
+  <% @current_user = User.find(session[:user_id]) %>
+
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
       <p class="copyright logout">
         <span>Hello <%=@current_user.name %></span><br>
-        <%= form_for @current_user, url: users_path(@current_user), method: :get do |f| %>
+        <%= form_for @current_user, url: user_path(@current_user), method: :get do |f| %>
         <%= f.submit "Homepage", class: "copyright logout" %>
         <% end %>
-        <%= form_for @current_user, url: user_profiles_path(@current_user), method: :get do |f| %>
+        <%= form_for @current_user, url: user_profiles_path(session[:user_id]), method: :get do |f| %>
         <%= f.submit "View Profile", class: "copyright logout" %>
         <% end %>
-        
-        <%= form_for @current_user, url: new_workout_path(@current_user), method: :get do |f| %>
-        <%= f.submit "Recommend a Workout or Diet", class: "copyright logout" %>
+
+        <%= form_for @current_user, url: new_workout_path(session[:user_id]), method: :get do |f| %>
+        <%= f.submit "Be a Trainer", class: "copyright logout" %>
         <% end %>
-        <%= form_for @current_user, url: workout_path(session[:user_id]), method: :get do |f| %>
-        <%= f.submit "Trainer", class: "copyright logout" %>
+
+        <%= form_for @current_user, url: user_trainer_path(@current_user), method: :get do |f| %>
+        <%= f.submit "Workouts", class: "copyright logout" %>
         <% end %>
         <%= form_for @current_user, url: end_session_path, method: :delete do |f| %>
         <%= f.submit "Logout", class: "copyright logout" %>
@@ -99,5 +102,7 @@
   <script src="js/clean-blog.min.js"></script>
 
 </body>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
 </html>

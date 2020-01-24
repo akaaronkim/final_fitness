@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
     before_action :set_user, only: [:show, :edit, :update]
-
+    
     def login
       @profile = User.new
     end
@@ -37,10 +37,10 @@ class ProfilesController < ApplicationController
   private
   
   def set_user
-    @user = User.find(params[:user_id])
+    @user = User.find(session[:user_id])
   end
   
   def user_params
-    params.require(:user).permit(:name, :city, :email, :about_me, :photo_url, :category_name)
+    params.require(:user).permit(:name, :url, :bio, :username, :img, :address, :phone, :occupation,  :password, :password_confirmation, :search)
   end
 end
