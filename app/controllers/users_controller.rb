@@ -25,10 +25,10 @@ class UsersController < ApplicationController
   end
 
 
-  def trainers
+  def trainer
     @new_review = Review.new
     @content_types = ["Workout", "Diet"]
-    @workouts = Workout.search(params[:search])
+    @workouts = Workout.all
       if @workouts == nil
         @searched = false
       elsif params[:search] && @workouts.length >= 1

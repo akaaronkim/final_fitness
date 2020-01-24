@@ -32,11 +32,12 @@
     <div class="workout-preview">
          <a href="#<%=@workout_modal%>Modal" data-toggle="modal">
            <h4 class="workout-title">
+          
             <%= workout.title %>
            </h4>
            <h5 class="workout-subtitle">
 
-           Posted by <%= User.find(workout.user_id).name %> on <%= (workout.created_at.strftime("%B %d, %Y")) %> | <%= workout.content_type %>
+           Created by <%= User.find(workout.user_id).name %> on <%= (workout.created_at.strftime("%B %d, %Y")) %> | <%= workout.content_type %>
 
            </h5>
          </a>
@@ -44,7 +45,7 @@
        </div>
        <div class="lineb">
     </div>
-    <!--END create post link on discover page with information-->
+    <!--END create workout link on discover page with information-->
 
     <!-- BEGIN Modal for workout details  -->
     <div class="modal" id="<%=@workout_modal%>Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -53,8 +54,8 @@
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel"><h4 class= "workout-subtitle">
               <h3><%= workout.title %> </h3>
-            Posted By: <%= link_to User.find(@trainer_id).name, user_profiles_path(User.find(@trainer_id)) %>
-            on <%= (post.created_at.strftime("%B, %d, %Y")) %> |
+            Created By: <%= link_to User.find(@trainer_id).name, user_profiles_path(User.find(@trainer_id)) %>
+            on <%= (workout.created_at.strftime("%B, %d, %Y")) %> |
              <%= link_to workout.content_type,workout.content_link, target: :_blank %>
              <h5><%= link_to image_tag("pump.png", height: "45", width: "45"), user_workout_pumps_path(@current_user, workout.id), method: :post, controller: 'pumps'%> <%= workout.pumps.count %> &nbsp; | &nbsp;
               <%= image_tag("review.png", height: "45", width: "45")%> <%= workout.reviews.count %></h5>
@@ -63,7 +64,7 @@
           </div>
           <div class="modal-body">
               <h4>
-              Description: <%= post.description %> <br>
+              Description: <%= workout.description %> <br>
               </h4>
               <br>
               <h4>Reviews:</h4>
@@ -86,7 +87,7 @@
                   <h5>Add Review:</h5>
                   <%= form_for @new_review, url: user_workout_reviews_path(@current_user, workout.id) do |f| %>
                   <%= f.text_area :text, maxlength: 200 %> <br>
-                  <%= f.label :text, "200 characters", class:"post-subtitle" %> <br>
+                  <%= f.label :text, "200 characters", class:"workout-subtitle" %> <br>
                   <br>
                   <%= f.submit "Create Review" %>
                   <% end  %>
